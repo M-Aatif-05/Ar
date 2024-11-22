@@ -1,50 +1,38 @@
+ <!DOCTYPE html>
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AR Ice Cream</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.rawgit.com/jeromeetienne/ar.js/2.2.1/aframe/build/aframe-ar.min.js"></script>
-  </head>
-  <body style="margin: 0; overflow: hidden;">
-    <!-- A-Frame Scene -->
-    <a-scene embedded arjs>
+@@ -11,12 +10,16 @@
       <!-- Marker -->
       <a-marker preset="hiro">
-        <!-- Background Logo -->
-        <a-image
-          src="https://i.imgur.com/2L6V5He.png"
-          position="0 1 -2"
-          scale="2 2 2"
-        ></a-image>
-
-        <!-- Embedded Ice Cream Model as a Placeholder -->
+        <!-- Spin the Wheel -->
         <a-entity
-          position="0 0.5 0"
-          rotation="0 180 0"
-          scale="0.5 0.5 0.5"
-          geometry="primitive: box; height: 0.01; width: 0.01; depth: 0.01"
-        >
-          <a-plane
-            position="0 0 0"
-            material="shader: html; target: #sketchfab-iframe"
-            width="1.5"
-            height="2"
-          ></a-plane>
+          id="wheel"
+          geometry="primitive: circle; radius: 1.5"
+          material="src: #wheelTexture; side: double; transparent: true;"
+          rotation="-90 0 0"
+        ></a-entity>
+        <a-entity id="wheel" geometry="primitive: circle; radius: 1.5" rotation="-90 0 0">
+          <!-- Directly using the image -->
+          <a-image 
+            src="https://i.imgur.com/pOuHAZl.png" 
+            position="0 0 0" 
+            rotation="0 0 0" 
+            width="3" 
+            height="3" 
+          ></a-image>
         </a-entity>
-      </a-marker>
 
-      <!-- Camera -->
+        <!-- Sound -->
+        <a-sound id="spinSound" src="https://cdn.pixabay.com/download/audio/2023/03/17/audio_5ff3013072.mp3" autoplay="false"></a-sound>
+@@ -26,9 +29,6 @@
       <a-entity camera></a-entity>
-
-      <!-- Hidden Sketchfab Embed -->
-      <iframe
-        id="sketchfab-iframe"
-        style="display: none;"
-        src="https://sketchfab.com/models/8d283399dde7478f8aa977b48a427c36/embed"
-      ></iframe>
     </a-scene>
-  </body>
-</html>
 
+    <!-- Texture for the wheel -->
+    <img id="wheelTexture" src="https://i.imgur.com/pOuHAZl.png" style="display: none;" />
+    <script>
+      // Adding interactivity to spin the wheel
+      document.querySelector("#wheel").addEventListener("click", function () 
+        
