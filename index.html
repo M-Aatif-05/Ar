@@ -12,74 +12,25 @@
     <a-scene embedded arjs>
       <!-- Marker -->
       <a-marker preset="hiro">
-        <!-- Create the Wheel -->
-        <a-entity id="wheel" position="0 0 0" rotation="-90 0 0">
-          <!-- Segment 1 -->
-          <a-cylinder
-            position="0 0 0.05"
-            rotation="0 0 0"
-            color="red"
-            radius="1.5"
-            height="0.1"
-            segments="12"
-            class="wheel-segment"
-          ></a-cylinder>
-
-          <!-- Segment 2 -->
-          <a-cylinder
-            position="0 0 0.05"
-            rotation="30 0 0"
-            color="blue"
-            radius="1.5"
-            height="0.1"
-            segments="12"
-            class="wheel-segment"
-          ></a-cylinder>
-
-          <!-- Segment 3 -->
-          <a-cylinder
-            position="0 0 0.05"
-            rotation="60 0 0"
-            color="green"
-            radius="1.5"
-            height="0.1"
-            segments="12"
-            class="wheel-segment"
-          ></a-cylinder>
-
-          <!-- Segment 4 -->
-          <a-cylinder
-            position="0 0 0.05"
-            rotation="90 0 0"
-            color="yellow"
-            radius="1.5"
-            height="0.1"
-            segments="12"
-            class="wheel-segment"
-          ></a-cylinder>
-
-          <!-- Segment 5 -->
-          <a-cylinder
-            position="0 0 0.05"
-            rotation="120 0 0"
-            color="purple"
-            radius="1.5"
-            height="0.1"
-            segments="12"
-            class="wheel-segment"
-          ></a-cylinder>
-
-          <!-- Segment 6 -->
-          <a-cylinder
-            position="0 0 0.05"
-            rotation="150 0 0"
-            color="orange"
-            radius="1.5"
-            height="0.1"
-            segments="12"
-            class="wheel-segment"
-          ></a-cylinder>
-        </a-entity>
+        <!-- Create the Wheel (using your Imgur image as texture) -->
+        <a-cylinder
+          id="wheel"
+          position="0 0 0.05"
+          rotation="0 0 0"
+          radius="1.5"
+          height="0.1"
+          material="src: https://i.imgur.com/UHWRzcS.png; repeat: 1 1;"
+          class="wheel-segment"
+        >
+          <!-- Center part of the wheel -->
+          <a-cone
+            position="0 0 0"
+            height="0.2"
+            radius-bottom="0.2"
+            radius-top="0"
+            material="color: #999999"
+          ></a-cone>
+        </a-cylinder>
 
         <!-- Sound when spinning -->
         <a-sound
@@ -100,11 +51,11 @@
         const sound = document.querySelector("#spinSound");
         sound.components.sound.playSound();
 
-        // Spin animation
+        // Spin animation (wheel rotates 3600 degrees)
         this.setAttribute("animation", {
           property: "rotation",
           to: "0 0 3600", // Spins multiple times
-          dur: 5000, // Duration
+          dur: 5000, // Duration of spin (5 seconds)
           easing: "easeOutQuad",
           loop: false,
         });
