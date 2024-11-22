@@ -1,5 +1,4 @@
-
-   <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
@@ -11,12 +10,16 @@
       <!-- Marker -->
       <a-marker preset="hiro">
         <!-- Spin the Wheel -->
-        <a-entity
-          id="wheel"
-          geometry="primitive: circle; radius: 1.5"
-          material="src: #wheelTexture; side: double; transparent: true;"
-          rotation="-90 0 0"
-        ></a-entity>
+        <a-entity id="wheel" geometry="primitive: circle; radius: 1.5" rotation="-90 0 0">
+          <!-- Directly using the image -->
+          <a-image 
+            src="https://i.imgur.com/pOuHAZl.png" 
+            position="0 0 0" 
+            rotation="0 0 0" 
+            width="3" 
+            height="3" 
+          ></a-image>
+        </a-entity>
 
         <!-- Sound -->
         <a-sound id="spinSound" src="https://cdn.pixabay.com/download/audio/2023/03/17/audio_5ff3013072.mp3" autoplay="false"></a-sound>
@@ -25,9 +28,6 @@
       <!-- Camera -->
       <a-entity camera></a-entity>
     </a-scene>
-
-    <!-- Texture for the wheel -->
-    <img id="wheelTexture" src="https://i.imgur.com/pOuHAZl.png" style="display: none;" />
 
     <script>
       // Adding interactivity to spin the wheel
