@@ -15,35 +15,36 @@
         <!-- Background Logo -->
         <a-image
           src="https://i.imgur.com/2L6V5He.png"
-          position="0 0 -2"
-          scale="3 3 3"
+          position="0 1 -2"
+          scale="2 2 2"
         ></a-image>
 
-        <!-- Embedded Ice Cream 3D Model -->
+        <!-- Embedded Ice Cream Model as a Placeholder -->
         <a-entity
           position="0 0.5 0"
           rotation="0 180 0"
           scale="0.5 0.5 0.5"
           geometry="primitive: box; height: 0.01; width: 0.01; depth: 0.01"
         >
-          <a-entity
-            geometry="primitive: plane; height: 0.01; width: 0.01"
-            material="color: #FFF"
-            rotation="-90 0 0"
-          >
-            <a-entity
-              position="0 0 0"
-              rotation="0 0 0"
-              scale="2 2 2"
-              html-embed
-              src="https://sketchfab.com/models/8d283399dde7478f8aa977b48a427c36/embed"
-            ></a-entity>
-          </a-entity>
+          <a-plane
+            position="0 0 0"
+            material="shader: html; target: #sketchfab-iframe"
+            width="1.5"
+            height="2"
+          ></a-plane>
         </a-entity>
       </a-marker>
 
       <!-- Camera -->
       <a-entity camera></a-entity>
+
+      <!-- Hidden Sketchfab Embed -->
+      <iframe
+        id="sketchfab-iframe"
+        style="display: none;"
+        src="https://sketchfab.com/models/8d283399dde7478f8aa977b48a427c36/embed"
+      ></iframe>
     </a-scene>
   </body>
 </html>
+
