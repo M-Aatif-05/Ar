@@ -73,6 +73,20 @@
         }, 3000); // Delay for spin animation
     });
 </script>
+<a-scene embedded>
+  <a-marker preset="hiro" id="hiro-marker">
+    <a-box position="0 0.5 0" material="color: red;"></a-box>
+  </a-marker>
+  <a-entity camera></a-entity>
+</a-scene>
+<script>
+  document.querySelector('#hiro-marker').addEventListener('markerFound', () => {
+    console.log('Hiro marker found!');
+  });
+  document.querySelector('#hiro-marker').addEventListener('markerLost', () => {
+    console.log('Hiro marker lost!');
+  });
+</script>
 
 </body>
 </html>
