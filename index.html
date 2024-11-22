@@ -1,35 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spin the Wheel</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.rawgit.com/jeromeetienne/ar.js/2.2.1/aframe/build/aframe-ar.min.js"></script>
-    <title>AR Ice Cream</title>
-  </head>
-  <body style="margin: 0; overflow: hidden;">
-    <!-- A-Frame Scene -->
-    <a-scene embedded arjs="sourceType: webcam;">
-      <!-- Marker -->
-      <a-marker preset="hiro">
-        <!-- Background Logo -->
-        <a-image 
-          src="https://i.imgur.com/B5NivQf.png" 
-          position="0 0 0" 
-          scale="3 3 3"
-          rotation="-90 0 0">
-        </a-image>
+    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
+    <style>
+        body { margin: 0; overflow: hidden; }
+        a-scene { width: 100vw; height: 100vh; }
+    </style>
+</head>
+<body>
 
-        <!-- Ice Cream 3D Model -->
+<a-scene embedded arjs>
+    <!-- Marker -->
+    <a-marker preset="hiro">
+        <!-- Spin the Wheel -->
         <a-entity 
-          position="0 0.5 0" 
-          scale="0.1 0.1 0.1" 
-          gltf-model="https://cdn.jsdelivr.net/gh/M-Aatif-05/icecream_model/icecream.gltf">
+            id="wheel" 
+            geometry="primitive: circle; radius: 2" 
+            material="src: url(https://example.com/path/to/image.png)"  <!-- Replace this with your hosted image URL -->
+            position="0 0 0" 
+            rotation="0 0 90">
         </a-entity>
-      </a-marker>
 
-      <!-- Camera -->
-      <a-entity camera></a-entity>
-    </a-scene>
-  </body>
+        <!-- Spin Button -->
+        <a-entity 
+            id="button" 
+            geometry="primitive: plane; height: 0.5; width: 1" 
+            material="color: red" 
+            position="0 -2 0"
+            text="value: SPIN; align: center; color: white;">
+        </a-entity>
+    </a-marker>
+
+    <!-- AR Camera -->
+    <a-entity camera></a-entity>
+</a-scene>
+
+<script>
+    const wheel = document.querySelector('#wheel');
+    const button = document.querySelector('#button');
+
+    // Prize Segments (Match these to your wheel design)
+    const prizes = ["Vanilla Scoop", "Chocolate Scoop", "Free Scoop", "10% Discount", "Try Again", "20% Discount"];
+
+    // Spin Logic
+    button.addEventListener('click', () => {
+        const spinDegrees = Math.floor(Math.random() * 360) + 720; // 720+ for multiple spins
+        wheel.object3D.rotation.z = THREE.Math.degToRad(spinDegrees);
+
+        // Calculate Prize (Based on 6 segments in this example)
+        setTimeout(() => {
+            const normalizedAngle = (spinDegrees % 360 + 360) % 360; // Keep angle positive
+            const segmentSize = 360 / prizes.length;
+            const prizeIndex = Math.floor(normalizedAngle / segmentSize);
+            alert(`You won: ${prizes[prizeIndex]}`);
+        }, 3000); // Delay for the spin animation
+    });
+</script>
+
+</body>
 </html>
