@@ -5,66 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/ar.js/2.2.1/aframe/build/aframe-ar.min.js"></script>
-    <title>Spin the Wheel AR</title>
+    <title>AR Ice Cream</title>
   </head>
   <body style="margin: 0; overflow: hidden;">
     <!-- A-Frame Scene -->
-    <a-scene embedded arjs>
+    <a-scene embedded arjs="sourceType: webcam;">
       <!-- Marker -->
       <a-marker preset="hiro">
-        <!-- Create the Wheel (using your Imgur image as texture) -->
-        <a-cylinder
-          id="wheel"
-          position="0 0 0.05"
-          rotation="0 0 0"
-          radius="1.5"
-          height="0.1"
-          material="src: https://i.imgur.com/UHWRzcS.png; repeat: 1 1;"
-          class="wheel-segment"
-        >
-          <!-- Center part of the wheel -->
-          <a-cone
-            position="0 0 0"
-            height="0.2"
-            radius-bottom="0.2"
-            radius-top="0"
-            material="color: #999999"
-          ></a-cone>
-        </a-cylinder>
+        <!-- Background Logo -->
+        <a-image 
+          src="https://i.imgur.com/B5NivQf.png" 
+          position="0 0 0" 
+          scale="3 3 3"
+          rotation="-90 0 0">
+        </a-image>
 
-        <!-- Sound when spinning -->
-        <a-sound
-          id="spinSound"
-          src="https://cdn.pixabay.com/download/audio/2023/03/17/audio_5ff3013072.mp3"
-          autoplay="false"
-        ></a-sound>
+        <!-- Ice Cream 3D Model -->
+        <a-entity 
+          position="0 0.5 0" 
+          scale="0.1 0.1 0.1" 
+          gltf-model="https://sketchfab.com/3d-models/8d283399dde7478f8aa977b48a427c36/embed">
+        </a-entity>
       </a-marker>
 
       <!-- Camera -->
       <a-entity camera></a-entity>
     </a-scene>
-
-    <script>
-      // Adding interactivity to spin the wheel
-      document.querySelector("#wheel").addEventListener("click", function () {
-        // Play the sound
-        const sound = document.querySelector("#spinSound");
-        sound.components.sound.playSound();
-
-        // Spin animation (wheel rotates 3600 degrees)
-        this.setAttribute("animation", {
-          property: "rotation",
-          to: "0 0 3600", // Spins multiple times
-          dur: 5000, // Duration of spin (5 seconds)
-          easing: "easeOutQuad",
-          loop: false,
-        });
-
-        // Reset after spin
-        setTimeout(() => {
-          this.setAttribute("rotation", "0 0 0");
-        }, 5000);
-      });
-    </script>
   </body>
 </html>
